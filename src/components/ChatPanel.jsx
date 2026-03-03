@@ -102,7 +102,7 @@ export default function ChatPanel({ tenderId, tender }) {
   }
 
   return (
-    <div className="rounded-2xl border border-gray-200/80 bg-white/80 backdrop-blur-sm flex flex-col shadow-sm h-[380px]">
+    <div className="rounded-2xl border border-gray-200/80 bg-white/80 backdrop-blur-sm flex flex-col shadow-sm h-[380px] w-full max-w-full min-w-0 overflow-hidden">
       <h3 className="font-bold text-protender-blue p-4 border-b border-gray-100">KI-Chat zur Ausschreibung</h3>
       <div className="flex-1 overflow-y-auto p-4 space-y-3">
         {messages.map((m) => (
@@ -140,8 +140,8 @@ export default function ChatPanel({ tenderId, tender }) {
           </button>
         ))}
       </div>
-      <div className="p-4 border-t border-gray-100 flex gap-2">
-        <input type="text" value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && send(input)} placeholder="Frage stellen…" className="flex-1 px-4 py-2 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-protender-blue/30 focus:border-protender-blue outline-none" />
+      <div className="p-4 border-t border-gray-100 flex gap-2 min-w-0">
+        <input type="text" value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && send(input)} placeholder="Frage stellen…" className="flex-1 min-w-0 px-4 py-2 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-protender-blue/30 focus:border-protender-blue outline-none" />
         <button type="button" onClick={() => send(input)} className="p-2 rounded-xl bg-protender-blue text-white hover:bg-protender-blue-dark transition-colors focus:outline-none focus:ring-2 focus:ring-protender-blue/50" aria-label="Senden">
           <Send className="w-5 h-5" />
         </button>

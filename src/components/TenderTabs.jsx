@@ -37,7 +37,7 @@ function DetailsTab({ tender }) {
   const kf = tender.keyFacts || {}
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 min-w-0">
       <section>
         <h4 className="text-sm font-semibold text-gray-700 mb-3">Beschreibung</h4>
         <div className="relative">
@@ -56,15 +56,15 @@ function DetailsTab({ tender }) {
 
       <section>
         <h4 className="text-sm font-semibold text-gray-700 mb-3">Kontakt</h4>
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-4 min-w-0">
           {tender.contact?.name && (
-            <span className="flex items-center gap-1">
+            <span className="flex items-center gap-1 min-w-0 break-words">
               {tender.contact.name}
               <CopyButton text={tender.contact.name} label="Name" />
             </span>
           )}
           {tender.contact?.email && (
-            <a href={`mailto:${tender.contact.email}`} className="text-protender-blue hover:underline flex items-center gap-1">
+            <a href={`mailto:${tender.contact.email}`} className="text-protender-blue hover:underline flex items-center gap-1 min-w-0 break-all">
               {tender.contact.email}
               <CopyButton text={tender.contact.email} label="E-Mail" />
             </a>
@@ -80,9 +80,9 @@ function DetailsTab({ tender }) {
 
       <section>
         <h4 className="text-sm font-semibold text-gray-700 mb-3">CPV-Codes</h4>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2 min-w-0">
           {tender.cpvCodes?.map((c) => (
-            <span key={c} className="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-gray-100 text-sm">
+            <span key={c} className="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-gray-100 text-sm break-all">
               {c}
               <CopyButton text={c} label="CPV" />
             </span>
@@ -97,8 +97,8 @@ export default function TenderTabs({ tender }) {
   const [active, setActive] = useState('details')
 
   return (
-    <div>
-      <div className="flex gap-1 border-b border-gray-200 mb-4 overflow-x-auto">
+    <div className="min-w-0 w-full max-w-full overflow-hidden">
+      <div className="flex gap-1 border-b border-gray-200 mb-4 overflow-x-auto min-w-0">
         {TABS.map((tab) => {
           const Icon = tab.icon
           return (

@@ -39,7 +39,7 @@ export default function NotesPanel({ tenderId }) {
   }
 
   return (
-    <div className="rounded-2xl border border-gray-200/80 bg-white/80 backdrop-blur-sm flex flex-col shadow-sm">
+    <div className="rounded-2xl border border-gray-200/80 bg-white/80 backdrop-blur-sm flex flex-col shadow-sm w-full max-w-full min-w-0 overflow-hidden">
       <div className="flex items-center justify-between p-4 border-b border-gray-100">
         <h3 className="font-bold text-protender-blue">Notizen</h3>
         <div className="flex items-center gap-2">

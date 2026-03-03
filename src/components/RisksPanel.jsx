@@ -13,9 +13,9 @@ export default function RisksPanel({ risks }) {
       {risks.map((risk) => (
         <div
           key={risk.id}
-          className="p-4 rounded-xl border border-gray-200 bg-white/60"
+          className="p-4 rounded-xl border border-gray-200 bg-white/60 min-w-0 overflow-hidden"
         >
-          <div className="flex items-start gap-3">
+          <div className="flex items-start gap-3 min-w-0">
             <AlertTriangle
               className={`w-5 h-5 flex-shrink-0 mt-0.5 ${
                 risk.level === 'high'
@@ -25,9 +25,9 @@ export default function RisksPanel({ risks }) {
                   : 'text-gray-400'
               }`}
             />
-            <div>
-              <div className="flex items-center gap-2 mb-1">
-                <span className="font-medium text-gray-900">{risk.title}</span>
+            <div className="min-w-0 flex-1">
+              <div className="flex flex-wrap items-center gap-2 mb-1">
+                <span className="font-medium text-gray-900 break-words">{risk.title}</span>
                 <Badge variant={LEVEL_VARIANTS[risk.level] || 'default'}>
                   {risk.level === 'high' ? 'Hoch' : risk.level === 'medium' ? 'Mittel' : 'Niedrig'}
                 </Badge>

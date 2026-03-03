@@ -8,7 +8,6 @@ import {
   ArrowLeft,
   ArrowRight,
 } from 'lucide-react'
-import ProgressSteps from '../components/ProgressSteps'
 import GlassCard from '../components/GlassCard'
 import UploadItem from '../components/UploadItem'
 import ChipSelect from '../components/ChipSelect'
@@ -24,7 +23,7 @@ const UPLOAD_CONFIG = [
     id: 'handelsregister',
     label: 'Handelsregisterauszug / Gewerbeanmeldung',
     hint: 'Amtlicher Nachweis der Eintragung',
-    required: true,
+    required: false,
   },
   {
     id: 'unbedenklichkeit',
@@ -36,13 +35,13 @@ const UPLOAD_CONFIG = [
     id: 'versicherung',
     label: 'Versicherungsnachweis(e) (Betriebshaftpflicht)',
     hint: 'Aktueller Nachweis',
-    required: true,
+    required: false,
   },
   {
     id: 'referenzliste',
     label: 'Referenzliste / Projektliste',
     hint: 'Relevante abgeschlossene Projekte',
-    required: true,
+    required: false,
   },
   {
     id: 'eigenerklaerungen',
@@ -58,6 +57,7 @@ const defaultForm = {
   ansprechpartner: '',
   email: '',
   telefon: '',
+  websiteUrl: '',
   region: [],
   gewerke: [],
   unternehmensgroesse: '',
@@ -120,22 +120,15 @@ export default function Onboarding() {
   }
 
   const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)
-  const profileComplete =
-    form.unternehmensname.trim() &&
-    form.rechtsform &&
-    form.ansprechpartner.trim() &&
-    form.email.trim() &&
+  const canProceed =
+    form.unternehmensname.trim().length > 0 &&
+    (form.rechtsform || '').trim().length > 0 &&
+    form.ansprechpartner.trim().length > 0 &&
+    form.email.trim().length > 0 &&
     emailValid &&
     form.region.length > 0 &&
     form.gewerke.length > 0 &&
-    form.unternehmensgroesse
-
-  const uploadsComplete =
-    files.handelsregister &&
-    files.versicherung &&
-    files.referenzliste
-
-  const canProceed = profileComplete && uploadsComplete
+    (form.unternehmensgroesse || '').trim().length > 0
 
   const handleWeiter = () => {
     if (!canProceed) return
@@ -156,17 +149,14 @@ export default function Onboarding() {
       </div>
 
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-32">
-        {/* Header */}
         <header className="text-center mb-6">
           <h1 className="text-3xl sm:text-4xl font-extrabold text-white">
-            Willkommen bei ProTender
+            Unternehmensprofil
           </h1>
           <p className="mt-2 text-lg text-white/90 max-w-2xl mx-auto">
-            Einmal einrichten – danach analysiert ProTender Ausschreibungen automatisch und bewertet Risiken & Kalkulation.
+            Einmal einrichten – später jederzeit im Profil anpassbar.
           </p>
         </header>
-
-        <ProgressSteps current={1} />
 
         {/* Two-column layout */}
         <div className="grid lg:grid-cols-2 gap-8 mt-8">
@@ -247,6 +237,17 @@ export default function Onboarding() {
                 />
               </div>
 
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Webseite (optional)</label>
+                <input
+                  type="url"
+                  value={form.websiteUrl || ''}
+                  onChange={(e) => updateForm('websiteUrl', e.target.value)}
+                  placeholder="https://www.firma.de"
+                  className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-protender-blue/30 focus:border-protender-blue outline-none"
+                />
+              </div>
+
               <ChipSelect
                 label="Region / Einsatzgebiet"
                 options={REGIONEN}
@@ -316,6 +317,12 @@ export default function Onboarding() {
           {/* Right: Uploads + Why card */}
           <div className="space-y-6">
             <GlassCard title="Wichtige Nachweise" icon={FileCheck}>
+              <p className="text-xs text-gray-500 mb-4">
+                Optional für den Dummy – im Live-System für Submission erforderlich.
+              </p>
+              <p className="text-xs text-gray-500 mb-4 italic">
+                Später hochladen möglich.
+              </p>
               <div className="space-y-6">
                 {UPLOAD_CONFIG.map((item) => (
                   <UploadItem

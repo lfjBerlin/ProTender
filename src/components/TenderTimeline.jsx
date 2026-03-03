@@ -18,7 +18,7 @@ export default function TenderTimeline({ publishedISO, deadlineISO, projectStart
   const isOverdue = days < 0
 
   return (
-    <div className="rounded-2xl border border-gray-200/80 bg-white/80 backdrop-blur-sm p-5 shadow-sm">
+    <div className="rounded-2xl border border-gray-200/80 bg-white/80 backdrop-blur-sm p-5 shadow-sm w-full max-w-full min-w-0 overflow-hidden">
       <h3 className="font-bold text-protender-blue mb-4 flex items-center gap-2">
         <Calendar className="w-5 h-5" />
         Zeitstrahl

@@ -23,17 +23,17 @@ export default function TenderHeader({ tender, score }) {
   const ampelLabels = { success: 'Ausreichend Zeit', warning: 'Bald fällig', error: isOverdue ? 'Frist abgelaufen' : 'Dringend' }
 
   return (
-    <header className="sticky top-0 z-10 bg-white/95 backdrop-blur-sm border-b border-gray-200 -mx-4 px-4 py-4 lg:-mx-6 lg:px-6 lg:py-5">
-      <div className="max-w-6xl mx-auto">
-        <nav className="text-sm text-gray-500 mb-3">
+    <header className="sticky top-0 z-10 bg-white/95 backdrop-blur-sm border-b border-gray-200 -mx-4 px-4 py-4 lg:-mx-6 lg:px-6 lg:py-5 overflow-x-hidden">
+      <div className="max-w-6xl mx-auto min-w-0">
+        <nav className="text-sm text-gray-500 mb-3 min-w-0">
           <Link to="/radar" className="hover:text-protender-blue transition-colors">
             Radar
           </Link>
           <ChevronRight className="inline w-4 h-4 mx-1 align-middle" />
           <span className="text-gray-700">Ausschreibung</span>
         </nav>
-        <h1 className="text-xl lg:text-2xl font-bold text-protender-blue mb-3">{tender.title}</h1>
-        <div className="flex flex-wrap items-center gap-2 mb-4">
+        <h1 className="text-xl lg:text-2xl font-bold text-protender-blue mb-3 break-words">{tender.title}</h1>
+        <div className="flex flex-wrap items-center gap-2 mb-4 min-w-0">
           <button
             type="button"
             onClick={() => toggleSaveTender(tender.id)}
@@ -52,7 +52,7 @@ export default function TenderHeader({ tender, score }) {
           </Badge>
           {score != null && <Badge variant="blue">Score {score}</Badge>}
         </div>
-        <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-3 flex-wrap">
           <Link
             to={`/application/${tender.id}`}
             onClick={() => {

@@ -89,7 +89,7 @@ export default function Dashboard() {
   const formatVol = (n) => (n >= 1000000 ? `${(n / 1000000).toFixed(1)} Mio €` : `${(n / 1000).toFixed(0)}k €`)
 
   const nextSteps = []
-  if (!requiredUploaded) nextSteps.push({ label: 'Dokumente hochladen', href: '/onboarding' })
+  if (!requiredUploaded) nextSteps.push({ label: 'Dokumente hochladen', href: '/profile?tab=documents' })
   if (savedIds.length === 0) nextSteps.push({ label: 'Radar öffnen und Ausschreibungen speichern', href: '/radar' })
   if (activeApps.length === 0) nextSteps.push({ label: 'Bewerbungsprozess starten', href: '/radar' })
 
@@ -282,6 +282,11 @@ export default function Dashboard() {
                       Jetzt vervollständigen
                     </Link>
                   )}
+                  {profileComplete && (
+                    <Link to="/profile" className="ml-auto text-sm text-protender-blue font-medium hover:underline">
+                      Profil bearbeiten
+                    </Link>
+                  )}
                 </div>
                 <div className={`flex items-center gap-3 p-3 rounded-xl ${requiredUploaded ? 'bg-green-50' : 'bg-red-50'}`}>
                   {requiredUploaded ? (
@@ -293,8 +298,13 @@ export default function Dashboard() {
                     {requiredUploaded ? 'Pflichtdokumente hochgeladen' : `${missingUploads.length} fehlende Pflichtdokumente`}
                   </span>
                   {!requiredUploaded && (
-                    <Link to="/onboarding" className="ml-auto px-4 py-2 rounded-xl bg-protender-yellow text-protender-blue font-semibold text-sm hover:bg-protender-yellow-hover">
+                    <Link to="/profile?tab=documents" className="ml-auto px-4 py-2 rounded-xl bg-protender-yellow text-protender-blue font-semibold text-sm hover:bg-protender-yellow-hover">
                       Jetzt hochladen
+                    </Link>
+                  )}
+                  {requiredUploaded && (
+                    <Link to="/profile?tab=documents" className="ml-auto text-sm text-protender-blue font-medium hover:underline">
+                      Dokumente verwalten
                     </Link>
                   )}
                 </div>

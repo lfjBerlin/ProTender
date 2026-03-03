@@ -1,11 +1,12 @@
 import { Link, useLocation } from 'react-router-dom'
-import { LayoutDashboard, Search, FolderOpen, Archive } from 'lucide-react'
+import { LayoutDashboard, Search, FolderOpen, Archive, User } from 'lucide-react'
 
-const navItems = [
+export const NAV_ITEMS = [
   { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { path: '/radar', label: 'Radar', icon: Search },
   { path: '/projekte', label: 'Projekte', icon: FolderOpen },
   { path: '/archiv', label: 'Archiv', icon: Archive },
+  { path: '/profile', label: 'Profil', icon: User },
 ]
 
 export default function Sidebar() {
@@ -13,6 +14,7 @@ export default function Sidebar() {
   const isActive = (path) => {
     if (path === '/projekte') return location.pathname.startsWith('/projekte')
     if (path === '/archiv') return location.pathname.startsWith('/archiv')
+    if (path === '/profile') return location.pathname.startsWith('/profile')
     return location.pathname === path || location.pathname.startsWith(path + '/')
   }
 
@@ -24,7 +26,7 @@ export default function Sidebar() {
         </Link>
       </div>
       <nav className="flex-1 p-4 space-y-1">
-        {navItems.map((item) => {
+        {NAV_ITEMS.map((item) => {
           const Icon = item.icon
           const active = isActive(item.path)
           return (

@@ -38,11 +38,11 @@ export default function TenderDetail() {
 
   if (!tender) {
     return (
-      <div className="min-h-screen flex">
+      <div className="min-h-screen flex w-full max-w-full overflow-x-hidden">
         <Sidebar />
-        <div className="flex-1 flex flex-col bg-gradient-to-b from-white to-blue-50/80">
+        <div className="flex-1 flex flex-col min-w-0 bg-gradient-to-b from-white to-blue-50/80 overflow-x-hidden">
           <Topbar />
-          <main className="flex-1 p-8 flex items-center justify-center">
+          <main className="flex-1 p-8 flex items-center justify-center overflow-x-hidden">
             <div className="text-center">
               <p className="text-xl text-gray-700 mb-4">Ausschreibung nicht gefunden.</p>
               <Link
@@ -67,50 +67,50 @@ export default function TenderDetail() {
   const formatDate = (iso) => new Date(iso).toLocaleDateString('de-DE', { day: 'numeric', month: 'short', year: 'numeric' })
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex w-full max-w-full overflow-x-hidden">
       <Sidebar />
-      <div className="flex-1 flex flex-col min-w-0 bg-gradient-to-b from-white to-blue-50/80">
+      <div className="flex-1 flex flex-col min-w-0 bg-gradient-to-b from-white to-blue-50/80 overflow-x-hidden">
         <Topbar />
-        <main className="flex-1 overflow-auto">
-          <div className="max-w-6xl mx-auto px-4 lg:px-6 py-6">
+        <main className="flex-1 overflow-x-hidden overflow-y-auto">
+          <div className="max-w-6xl mx-auto px-4 lg:px-6 py-6 min-w-0 w-full">
             <TenderHeader tender={tender} score={score} />
 
-            <div className="grid lg:grid-cols-3 gap-8 mt-8">
-              <div className="lg:col-span-2 space-y-6">
-                <div className="rounded-2xl border border-gray-200/80 bg-white/80 backdrop-blur-sm p-6 shadow-sm">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
+              <div className="lg:col-span-2 space-y-6 min-w-0 w-full max-w-full">
+                <div className="rounded-2xl border border-gray-200/80 bg-white/80 backdrop-blur-sm p-4 sm:p-6 shadow-sm w-full max-w-full overflow-hidden">
                   <h2 className="font-bold text-protender-blue mb-4">Übersicht</h2>
-                  <div className="grid sm:grid-cols-2 gap-4 mb-4">
-                    <div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                    <div className="min-w-0">
                       <p className="text-xs text-gray-500">Vergabestelle</p>
-                      <p className="font-medium text-gray-900">{tender.authority}</p>
+                      <p className="font-medium text-gray-900 break-words">{tender.authority}</p>
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <p className="text-xs text-gray-500">Ort</p>
-                      <p className="font-medium text-gray-900">{tender.location}</p>
+                      <p className="font-medium text-gray-900 break-words">{tender.location}</p>
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <p className="text-xs text-gray-500">Volumen</p>
                       <p className="font-medium text-gray-900">{formatVol(tender.volumeEur)}</p>
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <p className="text-xs text-gray-500">Frist</p>
                       <p className="font-medium text-gray-900">{formatDate(tender.deadlineISO)}</p>
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <p className="text-xs text-gray-500">Veröffentlichung</p>
                       <p className="font-medium text-gray-900">{formatDate(tender.publishedISO)}</p>
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <p className="text-xs text-gray-500">Projektstart</p>
                       <p className="font-medium text-gray-900">{formatDate(tender.projectStartISO)}</p>
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <p className="text-xs text-gray-500">Dauer</p>
                       <p className="font-medium text-gray-900">{tender.projectDurationWeeks} Wochen</p>
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <p className="text-xs text-gray-500">Los</p>
-                      <p className="font-medium text-gray-900">{kf.lot || '–'}</p>
+                      <p className="font-medium text-gray-900 break-words">{kf.lot || '–'}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-2 mb-4" title={ampel === 'green' ? 'Ausreichend Zeit' : ampel === 'yellow' ? 'Bald fällig' : 'Dringend'}>
@@ -142,7 +142,7 @@ export default function TenderDetail() {
                   </div>
                 </div>
 
-                <div className="rounded-2xl border border-gray-200/80 bg-white/80 backdrop-blur-sm p-6 shadow-sm">
+                <div className="rounded-2xl border border-gray-200/80 bg-white/80 backdrop-blur-sm p-4 sm:p-6 shadow-sm w-full max-w-full overflow-hidden">
                   <h2 className="font-bold text-protender-blue mb-4">Zuschlagskriterien</h2>
                   <WeightBar
                     priceWeight={tender.evaluation?.priceWeight}
@@ -151,17 +151,17 @@ export default function TenderDetail() {
                   />
                 </div>
 
-                <div className="rounded-2xl border border-gray-200/80 bg-white/80 backdrop-blur-sm p-6 shadow-sm">
+                <div className="rounded-2xl border border-gray-200/80 bg-white/80 backdrop-blur-sm p-4 sm:p-6 shadow-sm w-full max-w-full overflow-hidden">
                   <TenderTabs tender={tender} />
                 </div>
 
-                <div className="rounded-2xl border border-gray-200/80 bg-white/80 backdrop-blur-sm p-4 shadow-sm">
+                <div className="rounded-2xl border border-gray-200/80 bg-white/80 backdrop-blur-sm p-4 shadow-sm w-full max-w-full overflow-hidden">
                   <h3 className="font-bold text-protender-blue text-sm mb-2">Letzte Änderungen</h3>
                   <p className="text-sm text-gray-500">Keine Änderungen seit Veröffentlichung.</p>
                 </div>
 
                 {similar.length > 0 && (
-                  <div className="rounded-2xl border border-gray-200/80 bg-white/80 backdrop-blur-sm p-6 shadow-sm">
+                  <div className="rounded-2xl border border-gray-200/80 bg-white/80 backdrop-blur-sm p-4 sm:p-6 shadow-sm w-full max-w-full overflow-hidden">
                     <h3 className="font-bold text-protender-blue mb-4">Ähnliche Ausschreibungen</h3>
                     <ul className="space-y-3">
                       {similar.map((t) => (
@@ -169,9 +169,9 @@ export default function TenderDetail() {
                           <Link
                             to={`/tender/${t.id}`}
                             state={{ score: computeTenderScore(t, profile) }}
-                            className="block p-3 rounded-xl hover:bg-gray-50 transition-colors"
+                            className="block p-3 rounded-xl hover:bg-gray-50 transition-colors min-w-0"
                           >
-                            <p className="font-medium text-gray-900">{t.title}</p>
+                            <p className="font-medium text-gray-900 break-words">{t.title}</p>
                             <p className="text-sm text-gray-500">{t.location} · {formatVol(t.volumeEur)}</p>
                           </Link>
                         </li>
@@ -181,7 +181,7 @@ export default function TenderDetail() {
                 )}
               </div>
 
-              <div className="space-y-6">
+              <div className="space-y-6 min-w-0 w-full max-w-full">
                 <TenderTimeline
                   publishedISO={tender.publishedISO}
                   deadlineISO={tender.deadlineISO}

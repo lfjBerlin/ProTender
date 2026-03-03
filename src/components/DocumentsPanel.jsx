@@ -28,9 +28,9 @@ export default function DocumentsPanel({ documents, updatedAt }) {
   const categories = ['LV', 'Vertrag', 'Formblatt', 'Anlage'].filter((c) => byCategory[c]?.length)
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between gap-4">
-        <div className="relative flex-1">
+    <div className="space-y-4 min-w-0 w-full max-w-full">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 min-w-0">
+        <div className="relative flex-1 min-w-0 w-full">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
           <input
             type="search"
@@ -40,8 +40,11 @@ export default function DocumentsPanel({ documents, updatedAt }) {
             className="w-full pl-9 pr-4 py-2 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-protender-blue/30 focus:border-protender-blue outline-none"
           />
         </div>
-        <span className="text-sm text-gray-500 whitespace-nowrap">
-          {documents.length} Dokumente {updatedAt && `• zuletzt aktualisiert ${new Date(updatedAt).toLocaleDateString('de-DE')}`}
+        <span className="text-sm text-gray-500 shrink-0">
+          <span className="sm:hidden">{documents.length} Dokumente</span>
+          <span className="hidden sm:inline">
+            {documents.length} Dokumente {updatedAt && `• zuletzt aktualisiert ${new Date(updatedAt).toLocaleDateString('de-DE')}`}
+          </span>
         </span>
       </div>
 
